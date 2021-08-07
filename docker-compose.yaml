@@ -1,0 +1,37 @@
+version: "3.7"
+
+services:
+
+  #frontend:
+  #  container_name: frontend
+  #  build:
+  #    context: .
+  #    dockerfile: docker/frontend/Dockerfile
+  #  ports:
+  #    - "8000:8000"
+
+  backend:
+    container_name: backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    volumes:
+      - ./backend/src:/go-app/
+    ports:
+      - "3000:3000"
+    links:
+      - database
+
+  database:
+    container_name: "database"
+    image: mariadb:10.6.3
+    environment:
+      MARIADB_ROOT_PASSWORD: root_password
+      MARIADB_DATABASE: rest_api
+      MARIADB_USER: rest_user
+      MARIADB_PASSWORD: rest_password
+    ports:
+        - "3306:3306"
+    volumes:
+      - "./data/mysql:/var/lib/mysql:rw"
+      
