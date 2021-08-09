@@ -7,6 +7,7 @@ import (
 
 	"lib/helper"
 	"lib/model"
+	"lib/repository"
 
 	"github.com/julienschmidt/httprouter"
 )
@@ -31,8 +32,9 @@ func (vma VirtualMachineController) Index(w http.ResponseWriter, r *http.Request
 // List all VirtualMachines
 func (vma VirtualMachineController) GetVirtualMachines(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	//var err error
+	repo := repository.NewVirtalMachineRepository()
 
-	machines := model.FetchAllVirtualMachines()
+	machines := repo.FetchAllVirtualMachines()
 
 	render := helper.NewResponseHelper()
 	render.Render(machines, w)
@@ -43,7 +45,10 @@ func (vma VirtualMachineController) GetVirtualMachine(w http.ResponseWriter, r *
 	i := p.ByName("id")
 	id, _ := strconv.Atoi(i)
 
-	machine := model.FetchVirtualMachine(id)
+	//var err error
+	repo := repository.NewVirtalMachineRepository()
+
+	machine := repo.FetchVirtualMachine(id)
 
 	render := helper.NewResponseHelper()
 
@@ -62,11 +67,13 @@ func (vma VirtualMachineController) SaveVirtualMachine(w http.ResponseWriter, r 
 	
 	render := helper.NewResponseHelper()
 
+	repo := repository.NewVirtalMachineRepository()
+
 	if vm.Id > 0 {
-		svm := model.UpdateVirtualMachine(vm)
+		svm := repo.UpdateVirtualMachine(vm)
 		render.Render(svm, w)
 	} else {
-		svm := model.InsertVirtualMachine(vm)
+		svm := repo.InsertVirtualMachine(vm)
 		render.Render(svm, w)
 	}
 }
