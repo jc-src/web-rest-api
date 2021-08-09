@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngxs/store';
 import { AddVirtualMachine } from '../../store/actions/vitual-machine.action';
-import { VirtualMachine } from '../../store/models/virtual-machine';
+import { VirtualMachine, VirtualMachineModel } from '../../store/models/virtual-machine';
 
 @Component({
   selector: 'app-vm-edit',
@@ -14,16 +14,12 @@ export class VmEditComponent implements OnInit {
   vmForm: FormGroup = new FormGroup({
     name: new FormControl('', Validators.required),
     cpu: new FormControl('', Validators.required),
+    ram: new FormControl('', Validators.required),
+    disk: new FormControl('', Validators.required),
+    disk_type: new FormControl('', Validators.required),
   });
 
-  virtualMachine: VirtualMachine = {
-    id: null,
-    name: null,
-    cpu: null,
-    ram: 10,
-    disk: 2,
-    disk_type: 1
-  }
+  virtualMachine: VirtualMachine = new VirtualMachineModel();
 
   constructor(private store: Store) {
     this.vmForm.reset();
@@ -32,7 +28,6 @@ export class VmEditComponent implements OnInit {
   addVirtualMachine() {
     const values: {} = this.vmForm.value;
     const data = Object.assign(this.virtualMachine, values);
-    console.dir({"submitted": true, data});
     this.store.dispatch(new AddVirtualMachine(data));
   }
 

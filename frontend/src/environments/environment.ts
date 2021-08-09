@@ -4,7 +4,12 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:3000'
+  apiUrl: 'http://localhost:3000',
+  config: {
+    virtialMachine: {
+      disk_type: {1: 'hdd', 2: 'ssd'}
+    }
+  }
 };
 
 /*

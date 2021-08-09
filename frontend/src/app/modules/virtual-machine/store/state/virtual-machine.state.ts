@@ -1,10 +1,11 @@
 
 import { State, Action, StateContext, Selector } from '@ngxs/store';
 import { AddVirtualMachine, GetVirtualMachines } from '../actions/vitual-machine.action';
-import { VirtualMachine } from '../models/virtual-machine';
+import { VirtualMachine, VirtualMachineModel } from '../models/virtual-machine';
 import { tap } from 'rxjs/operators';
 import { VirtualMachineService } from '../../service/virtual-machine.service';
 import { Injectable } from '@angular/core';
+import { VirtualMachineModule } from '../../virtual-machine.module';
 
 
 export class VirtualMachineStateModel {
@@ -26,12 +27,14 @@ export class VirtualMachineState {
 
     @Selector()
     static getVirtualMachines(state: VirtualMachineStateModel) {
-        return state.virtualMachines;
+        return state.virtualMachines.map(
+            obj => Object.assign(new VirtualMachineModel(), obj)
+        )
     }
 
     @Selector()
     static getVirtualMachine(state: VirtualMachineStateModel) {
-        return state.virtualMachine;
+        return state.virtualMachine ? Object.assign(new VirtualMachineModel(), state.virtualMachine) : null;
     }
 
     @Action(AddVirtualMachine)

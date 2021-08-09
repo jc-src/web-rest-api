@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngxs/store';
+
 import { Observable } from 'rxjs';
 import { VirtualMachineService } from '../../service/virtual-machine.service';
 import { GetVirtualMachines } from '../../store/actions/vitual-machine.action';
-import { VirtualMachine } from '../../store/models/virtual-machine';
+import { VirtualMachineModel } from '../../store/models/virtual-machine';
+import { VirtualMachineState } from '../../store/state/virtual-machine.state';
 
 @Component({
   selector: 'app-vm-list',
@@ -13,14 +15,13 @@ import { VirtualMachine } from '../../store/models/virtual-machine';
 })
 export class VmListComponent implements OnInit {
 
-  virtualMachines: Observable<VirtualMachine[]>;
+  virtualMachines: Observable<VirtualMachineModel[]>;
 
-  constructor(private store: Store) {
-    this.virtualMachines = this.store.select(state => state.virtualMachines.virtualMachines);
+  constructor(private store: Store, private virtualMachineState: VirtualMachineState) {
+    this.virtualMachines = this.store.select(VirtualMachineState.getVirtualMachines);
    }
 
   ngOnInit(): void {
     this.store.dispatch(new GetVirtualMachines());
   }
-
 }

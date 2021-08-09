@@ -13,17 +13,14 @@ export class ApiService {
     }
 
     get<T>(url: string): Observable<any> {
-        alert('get');
         return this.http.get<T>( this.baseUrl + url);
     }
 
     post<T>(url: string, payload: any): Observable<any> {
-        alert('post');
         return this.http.post<T>(this.baseUrl + url, payload);
     }
 
     put<T>(url: string, payload: any): Observable<any> {
-        alert('put');
         return this.http.put<T>(this.baseUrl + url, payload);
     }
 /*

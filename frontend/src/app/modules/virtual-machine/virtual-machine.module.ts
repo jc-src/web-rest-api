@@ -10,6 +10,7 @@ import { NgxsModule } from '@ngxs/store';
 import { VirtualMachineState } from './store/state/virtual-machine.state';
 import { environment } from 'src/environments/environment';
 import { VirtualMachineService } from './service/virtual-machine.service';
+import { SharedModuleModule } from '../shared-module/shared-module.module';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { VirtualMachineService } from './service/virtual-machine.service';
     VmEditComponent
   ],
   imports: [
+    SharedModuleModule,
     VirtualMachineRoutingModule,
     CommonModule,
     NgxsModule.forRoot([VirtualMachineState], {
