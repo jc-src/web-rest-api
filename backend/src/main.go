@@ -22,13 +22,16 @@ func main() {
 	// Instantiate new router
 	router := httprouter.New()
 
-	//render := helper.NewResponseHelper()
 
+	ccController := controller.NewCorsController()
+	router.OPTIONS("/virtual-machines", ccController.Cors)
+
+	// VirtualMachines
 	vmController := controller.NewVirtualMachineController()
 
-	// index
 	router.GET("/", vmController.Index)
 	router.GET("/virtual-machines", vmController.GetVirtualMachines)
+	router.POST("/virtual-machines", vmController.SaveVirtualMachine)
 	router.GET("/virtual-machines/:id", vmController.GetVirtualMachine)
 
 	// Todo resources

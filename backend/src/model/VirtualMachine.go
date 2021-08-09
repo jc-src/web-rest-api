@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"lib/config"
 	"lib/helper"
+	"strconv"
 )
 
 type VirtualMachine struct {
@@ -83,6 +84,24 @@ func FetchAllVirtualMachines() VirtualMachines {
 	return queryVirtualMachines("SELECT * FROM virtual_machine")
 }
 
-func FetchVirtualVMachine(id int) VirtualMachine {
+func FetchVirtualMachine(id int) VirtualMachine {
 	return queryVirtualMachine(id)
+}
+
+func SaveVirtualMachine(vm VirtualMachine) VirtualMachine {
+	// insert values
+	sqlStr := "INSERT INTO virtual_machine(name, cpu, ram, disk, disk_type) VALUES (?, ?, ?, ?, ?)"
+	//prepare the statement
+	stmt, err := config.DB.Prepare(sqlStr)
+	helper.CheckErr(err)
+	//format all vals at once
+	// todo DiskType
+	res, err := stmt.Exec(vm.Name, strconv.Itoa(vm.Cpu), strconv.Itoa(vm.Ram), strconv.Itoa(vm.Disk), strconv.Itoa(1))
+	helper.CheckErr(err)
+
+	id, err := res.LastInsertId()
+
+	vm.Id = int(id)
+
+	return vm
 }

@@ -1,0 +1,31 @@
+<p>vm-edit works!</p>
+
+<div class="card">
+    <div class="card-body">
+      <form [formGroup]="vmForm" (ngSubmit)="addVirtualMachine()">
+        <div class="form-group">
+          <label class="col-md-4">Name</label>
+          <input type="text" class="form-control" formControlName="name" #name/>
+          <div *ngIf="!vmForm.get('name')?.valid && vmForm.get('name')?.touched" class="alert alert-danger">
+            <div *ngIf="vmForm.get('name')?.errors?.required">
+              Name is required.
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-4">Cpu</label>
+          <input type="number" class="form-control" formControlName="cpu" #email/>
+          <div *ngIf="vmForm.controls['cpu'].invalid && (vmForm.controls['cpu'].dirty || vmForm.controls['cpu'].touched)" class="alert alert-danger">
+            <div *ngIf="vmForm.controls['cpu'].errors?.required">
+              Cpu is required.
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <button
+              class="btn btn-primary"
+              [disabled]="vmForm.pristine || vmForm.invalid">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>

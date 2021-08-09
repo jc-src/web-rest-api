@@ -1,0 +1,34 @@
+<div class="row  pt-1 mb-2">
+
+    <div class="col-12 col-md-6 text-center mb-2">
+      <h1 class="h5 mb-4 text-primary">
+        <strong>Frontend</strong></h1>
+      <h2 class="h6 mb-4">
+        <strong>What's included</strong></h2>
+      <blockquote class="blockquote bq-primary">
+        <div class="row"> <i class="fas fa-laptop fa-sm mt-1 mb-1 mr-3 ml-3" aria-hidden="true"></i>
+          <h3 class="h5 font-weight-bold">Dependencies</h3>
+        </div>
+        <div class="row ml-4" *ngFor="let item of dependencies.frontend">
+          <h5 class="h6 font-weight-bold dark-grey-text ml-2"><i class="fa fa-square fa-xs text-info mr-2"
+              aria-hidden="true"></i>{{ item.name }}</h5>
+        </div>
+      </blockquote>
+    </div>
+  
+    <div class="col-12 col-md-6 text-center mb-2">
+      <h1 class="h5 mb-4 text-primary">
+        <strong>Backend</strong></h1>
+      <h2 class="h6 mb-4">
+        <strong>What's included</strong></h2>
+      <blockquote class="blockquote bq-primary">
+        <div class="row"> <i class="fas fa-laptop fa-sm mt-1 mb-1 mr-3 ml-3" aria-hidden="true"></i>
+          <h3 class="h5 font-weight-bold">Dependencies</h3>
+        </div>
+        <div class="row ml-4" *ngFor="let item of dependencies.backend">
+          <h5 class="h6 font-weight-bold dark-grey-text ml-2"><i class="fa fa-square fa-xs text-info mr-2"
+              aria-hidden="true"></i>{{ item.name }}</h5>
+        </div>
+      </blockquote>
+    </div>
+  </div>

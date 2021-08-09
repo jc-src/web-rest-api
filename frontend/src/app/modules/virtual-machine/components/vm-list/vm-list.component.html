@@ -1,0 +1,9 @@
+<h1>VM List</h1>
+
+<p>vm-list works!</p>
+
+<ul>
+    <li *ngFor="let machine of virtualMachines | async">
+        {{machine.name}}. {{machine.cpu}}
+      </li>
+</ul>

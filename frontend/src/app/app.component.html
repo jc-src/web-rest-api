@@ -1,0 +1,113 @@
+<header>
+
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bd-navbar" style="background-color: #212121;">
+      <div class="container-fluid">
+
+        <a class="navbar-brand" routerLink="/">
+          <span class="me-1">ganatan</span>
+          <img src="assets/params/images/logo/ganatan.png" width="20" height="20" alt="">
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#bd-docs-nav"
+          aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarsDefault">
+          <ul class="navbar-nav mx-auto">
+            <li class="nav-item active">
+              <a class="nav-link text-white" routerLink="/">
+                <i class="fas fa-home me-1"></i>home
+              </a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link text-white" routerLink="/virtual-machines">
+                <i class="far fa-question-circle mr-1"></i>Virtual Machines
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  
+  </header>
+  
+  
+  <div class="container-xxl my-md-4 bd-layout">
+    
+    <aside class="bd-sidebar">
+      <nav class="collapse bd-links" id="bd-docs-nav" aria-label="Docs navigation">
+        <ul class="list-unstyled mb-0 py-3 pt-md-1">
+          <li *ngFor="let item of items" class="mb-1 active">
+            <a class="d-inline-flex align-items-center rounded" data-bs-toggle="collapse" href="#{{ item.link }}-collapse"
+              role="button" aria-expanded="true" aria-current="true">
+              {{ item.name }}
+            </a>
+            <div class="collapse" id="{{ item.link }}-collapse">
+              <ul class="list-unstyled fw-normal pb-1 small">
+                <li *ngFor="let element of item.elements"><a (click)="onSelectMenu(element.link)"
+                    class="d-inline-flex align-items-center rounded">{{ element.name }}</a>
+                </li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+  
+    <main class="bd-main order-1 pt-5">
+      <div class="bd-content ps-lg-4">
+        <router-outlet></router-outlet>
+      </div>
+    </main>
+  
+  </div>
+  
+  
+  
+  <!--<main class="">
+    <div class="container-xxl bd-layout">
+      <div class="bd-sidebar">
+        <nav class="collapse bd-links pt-4" id="bd-docs-nav">
+          <ul class="list-unstyled mb-0">
+            <li class="my-1 active d-lg-none">
+              <a class="d-inline-flex align-items-center rounded" data-bs-toggle="collapse" href="#ganatan-collapse"
+                role="button" aria-expanded="true" aria-current="true">
+                About Ganatan
+              </a>
+              <ul class="list-unstyled font-weight-normal mb-2 collapse" id="ganatan-collapse">
+                <li><a (click)="onSelectMenu('about')" class="d-inline-flex align-items-center rounded active"
+                    aria-current="page">About</a>
+                </li>
+                <li><a (click)="onSelectMenu('contact')" class="d-inline-flex align-items-center rounded">Contact</a></li>
+              </ul>
+            </li>
+            <li *ngFor="let item of items" class="my-1 active">
+              <a class="d-inline-flex align-items-center rounded" data-bs-toggle="collapse" href="#{{ item.link }}-collapse"
+                role="button" aria-expanded="true" aria-current="true">
+                {{ item.name }}
+              </a>
+              <ul class="list-unstyled font-weight-normal mb-2 collapse" id="{{ item.link }}-collapse">
+                <li *ngFor="let element of item.elements"><a (click)="onSelectMenu(element.link)"
+                    class="d-inline-flex align-items-center rounded">{{ element.name }}</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="bd-content pt-4">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </main> -->
+  
+  <div class="footer" style="background-color:#1976d2">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <p class="text-center text-white">&copy; 2020 - www.ganatan.com</p>
+        </div>
+      </div>
+    </div>
+  </div>

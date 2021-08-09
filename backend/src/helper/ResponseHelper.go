@@ -26,7 +26,7 @@ func (rsp ResponseHelper) Render(data interface{}, w http.ResponseWriter) {
 		return
 	}
 
-	w.Header().Set("Content-Type", "application/json")
+	rsp.setCors(w)
 	w.Write(js)
 }
 
@@ -39,8 +39,19 @@ func (rsp ResponseHelper) Error(data interface{}, w http.ResponseWriter) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-
-	w.Header().Set("Content-Type", "application/json")
+	rsp.setCors(w)
 	w.WriteHeader(http.StatusNotFound)
 	w.Write(js)
+}
+
+func (rsp ResponseHelper) setCors(w http.ResponseWriter) {
+	headers := w.Header()
+
+	headers.Set("Content-Type", "application/json")
+	headers.Set("Access-Control-Allow-Origin", "*")
+    headers.Set("Vary", "Origin")
+    headers.Set("Vary", "Access-Control-Request-Method")
+    headers.Set("Vary", "Access-Control-Request-Headers")
+    headers.Set("Access-Control-Allow-Headers", "Content-Type, Origin, Accept, token")
+	headers.Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
 }
