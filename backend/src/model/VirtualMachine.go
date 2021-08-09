@@ -13,7 +13,7 @@ type VirtualMachine struct {
 	Cpu   int     `json:"cpu,omitempty"`
 	Ram   int     `json:"ram,omitempty"`
 	Disk  int     `json:"disk,omitempty"`
-	DiskType   string     `json:"disk_type,omitempty"`
+	DiskType   int     `json:"disk_type,omitempty"`
 	Volumes   VirtualVolumes `json:"volumes,omitempty"`
 }
 
@@ -23,7 +23,7 @@ type VirtualMachineDB struct {
 	Cpu   int     `json:"cpu,omitempty"`
 	Ram   int     `json:"ram,omitempty"`
 	Disk  int     `json:"disk,omitempty"`
-	DiskType   string     `json:"disk_type,omitempty"`
+	DiskType   int     `json:"disk_type,omitempty"`
 	Volumes   string     `json:"volumes,omitempty"`
 }
 
@@ -88,20 +88,25 @@ func FetchVirtualMachine(id int) VirtualMachine {
 	return queryVirtualMachine(id)
 }
 
-func SaveVirtualMachine(vm VirtualMachine) VirtualMachine {
-	// insert values
+func InsertVirtualMachine(vm VirtualMachine) VirtualMachine {
 	sqlStr := "INSERT INTO virtual_machine(name, cpu, ram, disk, disk_type) VALUES (?, ?, ?, ?, ?)"
-	//prepare the statement
 	stmt, err := config.DB.Prepare(sqlStr)
 	helper.CheckErr(err)
-	//format all vals at once
-	// todo DiskType
 	res, err := stmt.Exec(vm.Name, strconv.Itoa(vm.Cpu), strconv.Itoa(vm.Ram), strconv.Itoa(vm.Disk), strconv.Itoa(1))
 	helper.CheckErr(err)
 
 	id, err := res.LastInsertId()
-
 	vm.Id = int(id)
+	return vm
+}
+
+func UpdateVirtualMachine(vm VirtualMachine) VirtualMachine {
+	sqlStr := "UPDATE virtual_machine SET name=?, cpu=?, ram=?, disk=?, disk_type=? WHERE id = ?"
+	stmt, err := config.DB.Prepare(sqlStr)
+	helper.CheckErr(err)
+	id := strconv.Itoa(vm.Id)
+	stmt.Exec(vm.Name, strconv.Itoa(vm.Cpu), strconv.Itoa(vm.Ram), strconv.Itoa(vm.Disk), strconv.Itoa(vm.DiskType), id)
+	helper.CheckErr(err)
 
 	return vm
 }

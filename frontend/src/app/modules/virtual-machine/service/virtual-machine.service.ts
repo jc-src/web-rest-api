@@ -16,6 +16,10 @@ export class VirtualMachineService {
         return this.api.get<VirtualMachine[]>(this.url);
     }
 
+    fetchVirtualMachine(id: number) {
+        return this.api.get<VirtualMachine>(this.url+ '/' + id);
+    }
+
     saveVirtualMachine(payload: VirtualMachine) {
         if (payload.id) {
             return this.api.put<VirtualMachine>(this.url + '/' + payload.id, payload);

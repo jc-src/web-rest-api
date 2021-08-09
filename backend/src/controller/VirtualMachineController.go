@@ -52,26 +52,21 @@ func (vma VirtualMachineController) GetVirtualMachine(w http.ResponseWriter, r *
 
 func (vma VirtualMachineController) SaveVirtualMachine(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 
-	// Stub an order_details to be populated from the body
+	// Stub an object to be populated from the body
 	vm := model.VirtualMachine{}
 
-	// Populate the order_details data
+	// Populate the object data
 	json.NewDecoder(r.Body).Decode(&vm)
 
-	svm := model.SaveVirtualMachine(vm)
-
-	/*
-	i := p.ByName("id")
-	id, _ := strconv.Atoi(i)
-
-	if id > 0 | id = nil {
-		id = 1
-	}
-	*/
-
-	//machine := model.FetchVirtualMachine(1)
-
+	// TODO VALIDATE!
+	
 	render := helper.NewResponseHelper()
 
-	render.Render(svm, w)
+	if vm.Id > 0 {
+		svm := model.UpdateVirtualMachine(vm)
+		render.Render(svm, w)
+	} else {
+		svm := model.InsertVirtualMachine(vm)
+		render.Render(svm, w)
+	}
 }

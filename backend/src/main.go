@@ -32,6 +32,7 @@ func main() {
 	router.GET("/", vmController.Index)
 	router.GET("/virtual-machines", vmController.GetVirtualMachines)
 	router.POST("/virtual-machines", vmController.SaveVirtualMachine)
+	router.PUT("/virtual-machines", vmController.SaveVirtualMachine)
 	router.GET("/virtual-machines/:id", vmController.GetVirtualMachine)
 
 	// Todo resources

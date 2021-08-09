@@ -17,7 +17,7 @@ export class VmListComponent implements OnInit {
 
   virtualMachines: Observable<VirtualMachineModel[]>;
 
-  constructor(private store: Store, private virtualMachineState: VirtualMachineState) {
+  constructor(private store: Store) {
     this.virtualMachines = this.store.select(VirtualMachineState.getVirtualMachines);
    }
 

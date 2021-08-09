@@ -13,15 +13,22 @@
   </thead>
   <tbody>
     <tr *ngFor="let machine of virtualMachines | async">
-      <th scope="row">{{machine.id}}</th>
-      <td>{{machine.name}}</td>
-      <td>{{machine.cpu}}</td>
-      <td>{{machine.ram}} GB</td>
-      <td>{{machine.disk}}</td>
-      <td>{{machine.diskType}}</td>
+      <th scope="row">{{ machine.id }}</th>
+      <td>{{ machine.name }}</td>
+      <td>{{ machine.cpu }}</td>
+      <td>{{ machine.ram }} GB</td>
+      <td>{{ machine.disk }}</td>
+      <td>{{ machine.diskType }}</td>
       <td>
-        <i class="fas fa-edit"></i>
-        <i class="fas fa-eye"></i>
+        <a class="btn btn-default" routerLink="/virtual-machines/view/{{ machine.id }}">
+          <i class="fa fa-eye" title="View"></i>
+        </a>
+        <a class="btn btn-default" routerLink="/virtual-machines/edit/{{ machine.id }}">
+          <i class="fa fa-edit" title="Edit"></i>
+        </a>
+        <a class="btn btn-default" href="#">
+          <i class="fa fa-trash" title="Align Right"></i>
+        </a>
       </td>
     </tr>
   </tbody>

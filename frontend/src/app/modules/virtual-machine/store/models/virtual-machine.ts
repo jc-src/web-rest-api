@@ -7,6 +7,8 @@ export interface VirtualMachine {
 	ram: number | null;
 	disk: number | null;
 	disk_type: number | null;
+
+	diskTypes: { [key: number]: string; };
 }
 
 export class VirtualMachineModel implements VirtualMachine
