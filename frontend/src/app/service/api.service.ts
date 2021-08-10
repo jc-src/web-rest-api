@@ -8,9 +8,7 @@ export class ApiService {
 
     baseUrl: string = environment.apiUrl; 
 
-    constructor(private http: HttpClient) {
-        console.log('api service');
-    }
+    constructor(private http: HttpClient) { }
 
     get<T>(url: string): Observable<any> {
         return this.http.get<T>( this.baseUrl + url);

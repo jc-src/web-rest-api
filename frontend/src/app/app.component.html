@@ -38,22 +38,17 @@
     <aside class="bd-sidebar">
       <nav class="collapse bd-links" id="bd-docs-nav" aria-label="Docs navigation">
         <ul class="list-unstyled mb-0 py-3 pt-md-1">
-          <li *ngFor="let item of items" class="mb-1 active">
-            <a class="d-inline-flex align-items-center rounded" data-bs-toggle="collapse" href="#{{ item.link }}-collapse"
+          <li class="mb-1">
+            <a class="d-inline-flex align-items-center rounded" data-bs-toggle="collapse" routerLink="/virtual-machines/add"
               role="button" aria-expanded="true" aria-current="true">
-              {{ item.name }}
+              Add new VM
             </a>
-            <div class="collapse" id="{{ item.link }}-collapse">
-              <ul class="list-unstyled fw-normal pb-1 small">
-                <li *ngFor="let element of item.elements"><a (click)="onSelectMenu(element.link)"
-                    class="d-inline-flex align-items-center rounded">{{ element.name }}</a>
-                </li>
-              </ul>
-            </div>
           </li>
         </ul>
       </nav>
     </aside>
+
+    <app-side-menu></app-side-menu>
   
     <main class="bd-main order-1 pt-5">
       <div class="bd-content ps-lg-4">

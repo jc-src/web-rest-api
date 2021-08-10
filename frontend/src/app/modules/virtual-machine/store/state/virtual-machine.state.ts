@@ -54,7 +54,7 @@ export class VirtualMachineState {
     });
     return this.service.saveVirtualMachine(payload).pipe(
       tap((value) => {
-        console.log('updated on save', value);
+        // trigger add item to store with the new id console.log('updated on save', value);
       })
     );
   }
@@ -70,7 +70,7 @@ export class VirtualMachineState {
     });
     return this.service.saveVirtualMachine(payload).pipe(
       tap((value) => {
-        console.log('updated on save', value);
+        // Trigger updated in form and active and list console.log('updated on save', value);
       })
     );
   }
