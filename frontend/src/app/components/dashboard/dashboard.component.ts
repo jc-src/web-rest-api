@@ -23,7 +23,7 @@ export class DashboardComponent implements OnInit {
         { name: 'Bootstrap 5.1.0' },
       ],
       backend: [
-        { name: 'GoLang' },
+        { name: 'GoLang vx' },
       ]
     };
 
